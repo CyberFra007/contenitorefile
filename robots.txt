@@ -1,0 +1,39 @@
+# Questo file dichiara ESPLICITAMENTE che tutti i crawler, inclusi quelli AI,
+# possono accedere a qualunque contenuto del sito. Nessuna cartella è esclusa.
+# Non aggiungere righe "Disallow" se vuoi mantenere il sito pienamente crawlabile.
+
+User-agent: *
+Allow: /
+
+# Crawler AI espliciti (per chiarezza, anche se "Allow: /" sopra già li copre)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://TUO-USERNAME.github.io/TUO-REPO/sitemap.xml

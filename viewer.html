@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visualizzatore Documento</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="viewer-header">
+    <a href="index.html">&larr; Torna all'archivio</a>
+    <h2 id="doc-title">Documento</h2>
+  </header>
+
+  <main id="viewer-container">
+    <p>Caricamento visualizzatore…</p>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    const fileUrl = params.get("file");
+    const name = params.get("name") || "Documento";
+
+    document.getElementById("doc-title").textContent = name;
+    document.title = name + " — Archivio Documenti";
+
+    const container = document.getElementById("viewer-container");
+
+    if (!fileUrl) {
+      container.innerHTML = "<p>Nessun file specificato.</p>";
+    } else if (type === "pdf") {
+      // I PDF si visualizzano nativamente nel browser tramite <iframe>,
+      // senza scaricare il file: funziona su Chrome, Firefox, Safari desktop e mobile.
+      container.innerHTML = `
+        <iframe src="${fileUrl}" class="pdf-frame" title="${name}"></iframe>
+        <p class="fallback-note">Se l'anteprima non si carica sul tuo browser,
+        <a href="${fileUrl}" target="_blank" rel="noopener">apri il PDF in una nuova scheda</a>.</p>
+      `;
+    } else if (type === "office") {
+      // I file .docx non hanno un visualizzatore nativo da browser:
+      // usiamo il visualizzatore pubblico di Microsoft Office Online,
+      // che mostra il contenuto inline senza forzare il download.
+      const officeViewerUrl = "https://view.officeapps.live.com/op/embed.aspx?src=" + encodeURIComponent(fileUrl);
+      container.innerHTML = `
+        <iframe src="${officeViewerUrl}" class="pdf-frame" title="${name}"></iframe>
+        <p class="fallback-note">Visualizzazione tramite Microsoft Office Online Viewer.
+        Se non si carica, <a href="${fileUrl}" target="_blank" rel="noopener">apri il file direttamente</a>.</p>
+      `;
+    } else {
+      container.innerHTML = `<p><a href="${fileUrl}" target="_blank" rel="noopener">Apri il file</a></p>`;
+    }
+  </script>
+</body>
+</html>

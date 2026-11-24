@@ -1,0 +1,22 @@
+title: "Archivio Documenti"
+description: "Archivio pubblico di documenti PDF e DOCX, organizzati in cartelle."
+
+# IMPORTANTE: NON mettere "noindex: true" e NON abilitare opzioni che
+# impediscano l'indicizzazione. Jekyll di default non blocca nulla:
+# questa è la configurazione minima e già compatibile con i crawler AI.
+
+theme: null
+plugins: []
+
+# Mostra anche le cartelle che iniziano con "_" se mai ti servisse (di norma non serve)
+include: []
+
+# Evita che Jekyll ignori le tue cartelle di documenti
+exclude:
+  - README.md
+  - "*.gemspec"
+  - "*.gem"
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
